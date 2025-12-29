@@ -1,0 +1,614 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* New premium warm color palette inspired by high-end real estate */
+  --background: oklch(0.98 0.005 80);
+  --foreground: oklch(0.18 0.02 60);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 60);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 60);
+  /* Primary: warm charcoal */
+  --primary: oklch(0.25 0.02 60);
+  --primary-foreground: oklch(0.98 0 0);
+  /* Secondary: warm cream */
+  --secondary: oklch(0.96 0.01 80);
+  --secondary-foreground: oklch(0.25 0.02 60);
+  --muted: oklch(0.94 0.01 80);
+  --muted-foreground: oklch(0.45 0.02 60);
+  /* Accent: warm terracotta gold */
+  --accent: oklch(0.65 0.14 55);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.9 0.01 80);
+  --input: oklch(0.9 0.01 80);
+  --ring: oklch(0.65 0.14 55);
+  --chart-1: oklch(0.65 0.14 55);
+  --chart-2: oklch(0.55 0.12 180);
+  --chart-3: oklch(0.45 0.08 220);
+  --chart-4: oklch(0.75 0.15 85);
+  --chart-5: oklch(0.7 0.16 70);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.18 0.02 60);
+  --sidebar-primary: oklch(0.25 0.02 60);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.96 0.01 80);
+  --sidebar-accent-foreground: oklch(0.25 0.02 60);
+  --sidebar-border: oklch(0.9 0.01 80);
+  --sidebar-ring: oklch(0.65 0.14 55);
+}
+
+.dark {
+  --background: oklch(0.15 0.02 60);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.18 0.02 60);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.18 0.02 60);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.25 0.02 60);
+  --secondary: oklch(0.25 0.02 60);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.28 0.02 60);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.65 0.14 55);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.45 0.18 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.28 0.02 60);
+  --input: oklch(0.28 0.02 60);
+  --ring: oklch(0.65 0.14 55);
+  --chart-1: oklch(0.55 0.2 260);
+  --chart-2: oklch(0.65 0.15 160);
+  --chart-3: oklch(0.7 0.16 70);
+  --chart-4: oklch(0.6 0.22 300);
+  --chart-5: oklch(0.6 0.2 20);
+  --sidebar: oklch(0.2 0.02 60);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.55 0.2 260);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.28 0.02 60);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.28 0.02 60);
+  --sidebar-ring: oklch(0.45 0 0);
+}
+
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* =============================================
+   MOBILE SCROLL - Smooth scrolling only
+   Removed snap behavior for natural scrolling
+   ============================================= */
+
+/* Removed mandatory snap, using smooth scroll only for mobile */
+@media (max-width: 1023px) {
+  .mobile-snap-container {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  /* Removed snap-align, scroll behaves naturally */
+  .snap-section-hero,
+  .snap-section-content {
+    scroll-snap-align: unset;
+    scroll-snap-stop: unset;
+  }
+}
+
+/* Desktop: normal scrolling */
+@media (min-width: 1024px) {
+  .mobile-snap-container {
+    scroll-snap-type: none;
+    overflow-y: visible;
+    height: auto;
+  }
+
+  .snap-section-hero,
+  .snap-section-content {
+    scroll-snap-align: unset;
+    scroll-snap-stop: unset;
+  }
+}
+
+/* =============================================
+   RESPONSIVE BREAKPOINTS - Custom xs breakpoint
+   ============================================= */
+
+/* Added custom xs breakpoint styles for very small phones */
+@media (max-width: 374px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* =============================================
+   INFINITE SCROLL ANIMATIONS - Seamless loop
+   ============================================= */
+
+/* New seamless carousel implementation */
+.carousel-track {
+  display: flex;
+  gap: 4rem;
+  width: max-content;
+  animation: seamless-scroll 18s linear infinite;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.carousel-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Reversed direction: now starts at -50% and moves to 0 for left-to-right scrolling */
+@keyframes seamless-scroll {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Added tablet breakpoint and slightly slowed mobile/tablet speeds */
+@media (max-width: 1024px) {
+  .carousel-track {
+    animation-duration: 20s;
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-track {
+    /* Slowed from 12s to 16s */
+    animation-duration: 16s;
+    gap: 2.5rem;
+  }
+}
+
+/* Added smaller gap for very small screens */
+@media (max-width: 480px) {
+  .carousel-track {
+    /* Slowed from 10s to 14s */
+    animation-duration: 14s;
+    gap: 2rem;
+  }
+}
+
+/* Added extra small screen breakpoint for carousel */
+@media (max-width: 374px) {
+  .carousel-track {
+    /* Slowed from 8s to 12s */
+    animation-duration: 12s;
+    gap: 1.5rem;
+  }
+}
+
+/* Pause on hover for better UX */
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.mask-gradient-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+/* =============================================
+   AWARD BOX STYLES - Premium glass effect
+   ============================================= */
+
+.award-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  color: #ffffff;
+  text-align: center;
+  font-size: clamp(0.7rem, 0.5vw + 0.5rem, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  padding: clamp(0.625rem, 1vw, 1rem) clamp(1rem, 1.5vw, 1.5rem);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  white-space: nowrap;
+  min-width: clamp(6rem, 10vw, 10rem);
+  width: max-content;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.award-box:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* =============================================
+   COMPANY BOX STYLES - Elegant minimal
+   ============================================= */
+
+.company-box {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  font-size: clamp(0.9rem, 0.8vw + 0.5rem, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  min-width: 10rem;
+  flex-shrink: 0;
+  padding: 0 clamp(1.5rem, 3vw, 3rem);
+  transition: color 0.3s ease;
+}
+
+.company-box:hover {
+  color: var(--foreground);
+}
+
+.company-icon {
+  width: clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
+  height: clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.company-box:hover .company-icon {
+  opacity: 1;
+}
+
+/* =============================================
+   HERO OVERLAY - Cinematic gradient
+   ============================================= */
+
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 30%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+/* =============================================
+   FORM STYLES - Modern underline
+   ============================================= */
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1rem;
+  color: var(--foreground);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+  border-radius: 0;
+}
+
+.form-control:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.form-label {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus ~ .form-label,
+.form-control:not(:placeholder-shown) ~ .form-label {
+  top: -0.5rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.form-control.error {
+  border-bottom-color: var(--destructive);
+}
+
+/* =============================================
+   TOUCH TARGETS - Better mobile accessibility
+   ============================================= */
+
+/* Added minimum touch target sizes for mobile */
+@media (max-width: 768px) {
+  button:not([class*="inline"]),
+  a:not(p a):not(span a):not(li a):not([class*="inline"]) {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Exception for inline links */
+  p a,
+  span a,
+  li a {
+    min-height: auto;
+    min-width: auto;
+  }
+}
+
+/* =============================================
+   SPACING ADJUSTMENTS - Mobile optimization
+   ============================================= */
+
+/* Added tighter spacing for small screens */
+@media (max-width: 480px) {
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-control {
+    padding: 0.75rem 0;
+    font-size: 16px; /* Prevents iOS zoom on input focus */
+  }
+}
+
+/* =============================================
+   SCROLLBAR - Minimal
+   ============================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--muted-foreground);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--foreground);
+}
+
+/* =============================================
+   MOBILE-SPECIFIC STYLES
+   ============================================= */
+
+/* Hide scrollbar for horizontal scroll galleries */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Horizontal bounce animation for scroll hints */
+@keyframes bounce-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s ease-in-out infinite;
+}
+
+/* Mobile input styles - prevent iOS zoom */
+@media (max-width: 1023px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* =============================================
+   UTILITIES
+   ============================================= */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-left,
+  .animate-scroll-right {
+    animation: none !important;
+  }
+}
+
+/* =============================================
+   MOBILE-ONLY ANIMATIONS (< 768px)
+   These animations are ONLY for mobile components
+   ============================================= */
+
+/* Mobile-specific seamless scroll animation */
+@keyframes mobile-seamless-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-mobile-seamless-scroll {
+  animation: mobile-seamless-scroll 14s linear infinite;
+}
+
+@media (min-width: 400px) and (max-width: 767px) {
+  .animate-mobile-seamless-scroll {
+    animation-duration: 16s;
+  }
+}
+
+/* Mobile-specific awards scroll animation */
+@keyframes mobile-scroll-up-awards {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-33.33%));
+  }
+}
+
+.animate-mobile-scroll-up-awards {
+  animation: mobile-scroll-up-awards 20s linear infinite;
+}
+
+/* =============================================
+   TABLET-ONLY ANIMATIONS (768px - 1023px)
+   These animations are ONLY for tablet components
+   ============================================= */
+
+/* Tablet-specific seamless scroll animation */
+@keyframes tablet-seamless-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-tablet-seamless-scroll {
+  animation: tablet-seamless-scroll 20s linear infinite;
+}
+
+/* Tablet-specific bounce animation for scroll indicator */
+@keyframes tablet-bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.animate-tablet-bounce-slow {
+  animation: tablet-bounce-slow 2s ease-in-out infinite;
+}
+
+/* Tablet-specific fade in animation */
+@keyframes tablet-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-tablet-fade-in-up {
+  animation: tablet-fade-in-up 0.6s ease-out forwards;
+}
+
+/* Tablet-specific pulse animation for indicators */
+@keyframes tablet-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.animate-tablet-pulse-ring {
+  animation: tablet-pulse-ring 2s ease-in-out infinite;
+}
