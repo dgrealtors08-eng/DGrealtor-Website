@@ -2,6 +2,12 @@ import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
 
+const nameOverrides: Record<string, string> = {
+  "honda-bigwing-appreciation": "Honda BigWing Appreciation",
+  "nar-india-achievement": "NAR-INDIA Certificate of Achievement",
+  "teaa-ashwin-sheth-award": "Token of Appreciation",
+}
+
 export async function GET() {
   try {
     const awardsDir = path.join(process.cwd(), "public/images/awards-certificate-image")
@@ -23,8 +29,10 @@ export async function GET() {
     // Generate image data with auto-generated alt text from filename
     const images = imageFiles.map((file) => {
       const nameWithoutExt = path.basename(file, path.extname(file))
-      // Convert filename to readable alt text (replace hyphens/underscores with spaces, title case)
-      const alt = nameWithoutExt.replace(/[-_]/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
+
+      const alt =
+        nameOverrides[nameWithoutExt] ||
+        nameWithoutExt.replace(/[-_]/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
 
       return {
         src: `/images/awards-certificate-image/${file}`,
