@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const CloseIcon = () => (
   <svg
@@ -95,6 +95,7 @@ export function TabletContactSheet({ isOpen, onClose }: TabletContactSheetProps)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errors, setErrors] = useState<FormErrors>({})
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -145,19 +146,45 @@ export function TabletContactSheet({ isOpen, onClose }: TabletContactSheetProps)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!validateForm()) return
+    if (!validateForm()) {
+      console.log("[v0] Tablet form validation failed:", errors)
+      return
+    }
     setIsSubmitting(true)
+    console.log("[v0] Tablet - Starting form submission with data:", formData)
 
     try {
       const GOOGLE_FORM_URL =
         "https://docs.google.com/forms/d/e/1FAIpQLSf6MJGcRjek2oSYrb7V9OhIOMuFSypwxEL0S6U7HirzP1KG8Q/formResponse"
-      const formBody = new FormData()
-      formBody.append("entry.1633928210", formData.fullName)
-      formBody.append("entry.2056528554", formData.contactInfo)
-      formBody.append("entry.1138649828", formData.subject)
-      formBody.append("entry.1347963777", formData.message)
 
-      await fetch(GOOGLE_FORM_URL, { method: "POST", mode: "no-cors", body: formBody })
+      const form = document.createElement("form")
+      form.method = "POST"
+      form.action = GOOGLE_FORM_URL
+      form.target = "tablet_hidden_iframe"
+
+      const fields = [
+        { name: "entry.2005620554", value: formData.fullName },
+        { name: "entry.1045781291", value: formData.contactInfo },
+        { name: "entry.1065046570", value: formData.subject },
+        { name: "entry.839337160", value: formData.message },
+      ]
+
+      fields.forEach(({ name, value }) => {
+        const input = document.createElement("input")
+        input.type = "hidden"
+        input.name = name
+        input.value = value
+        form.appendChild(input)
+      })
+
+      document.body.appendChild(form)
+
+      console.log("[v0] Tablet - Submitting via iframe - Name:", formData.fullName, "Contact:", formData.contactInfo)
+
+      form.submit()
+      document.body.removeChild(form)
+
+      console.log("[v0] Tablet - Form submitted via iframe successfully")
 
       setIsSuccess(true)
       setFormData({ fullName: "", contactInfo: "", subject: "", message: "" })
@@ -167,8 +194,8 @@ export function TabletContactSheet({ isOpen, onClose }: TabletContactSheetProps)
         setIsSuccess(false)
         onClose()
       }, 2500)
-    } catch {
-      // Handle error silently
+    } catch (error) {
+      console.log("[v0] Tablet - Form submission error:", error)
     } finally {
       setIsSubmitting(false)
     }
@@ -184,6 +211,14 @@ export function TabletContactSheet({ isOpen, onClose }: TabletContactSheetProps)
 
   return (
     <>
+      {/* Hidden iframe for form submission */}
+      <iframe
+        ref={iframeRef}
+        name="tablet_hidden_iframe"
+        style={{ display: "none" }}
+        title="Hidden form submission iframe"
+      />
+
       {/* Backdrop */}
       <div
         className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
