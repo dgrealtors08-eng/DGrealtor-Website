@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Montserrat, Playfair_Display } from "next/font/google"
 import "./globals.css"
-import NewYearOverlay from "@/components/new-year-overlay"
 
 /* 
   =============================================
@@ -74,7 +73,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body className="font-sans antialiased">
-        <NewYearOverlay />
         {children}
       </body>
     </html>
